@@ -5,4 +5,5 @@
     <string name="message_received">Last Message Received:</string>
     <string name="call">Call Other Peer</string>
     <string name="hangup">Hang Up</string>
+    <string name="send">Send</string>
 </resources>

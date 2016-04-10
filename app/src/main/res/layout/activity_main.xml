@@ -44,6 +44,16 @@
         android:maxLines="5"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendMessage"
+        android:text="@string/send"
+        android:layout_gravity="end"
+        android:layout_marginEnd="8dp"
+        />
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +73,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/localPeerMessageReceived"
+        android:id="@+id/peerMessageReceived"
         android:paddingTop="16dp"
         android:textSize="18sp"
         android:layout_marginStart="8dp"

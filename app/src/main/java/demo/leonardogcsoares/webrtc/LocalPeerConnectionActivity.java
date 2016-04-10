@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 import org.json.JSONException;
@@ -18,8 +20,11 @@ import org.webrtc.PeerConnectionFactory;
 import org.webrtc.SdpObserver;
 import org.webrtc.SessionDescription;
 
+import java.nio.ByteBuffer;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import soares.leonardo.com.greta.signaling.Connected;
 import soares.leonardo.com.greta.signaling.Greta;
@@ -38,6 +43,9 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
 
     private Button callButton;
     private Button hangupButton;
+
+    private String localMessageReceived = " ";
+    private String localLastMessageReceived = " ";
 
     private boolean isInitiator = false;
 
@@ -66,24 +74,22 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
         public void onIceCandidate(IceCandidate iceCandidate) {
             Log.d(TAG, "peerConnectionObserver onIceCandidate: " + iceCandidate.toString());
 
-            if (isInitiator) {
-                JSONObject json = new JSONObject();
-                String mes;
+            JSONObject json = new JSONObject();
+            String mes;
 
-                try {
-                    json.put("type", "candidate");
-                    json.put("sdpMLineIndex", iceCandidate.sdpMLineIndex);
-                    json.put("sdpMid", iceCandidate.sdpMid);
-                    json.put("candidate", iceCandidate.sdp);
+            try {
+                json.put("type", "candidate");
+                json.put("sdpMLineIndex", iceCandidate.sdpMLineIndex);
+                json.put("sdpMid", iceCandidate.sdpMid);
+                json.put("candidate", iceCandidate.sdp);
 
-                    mes = json.toString();
+                mes = json.toString();
 
-                    Log.d(TAG, "iceCandidateJson" + mes);
-                    Greta.Signaling.publish("iceChannel", mes);
+                Log.d(TAG, "iceCandidateJson" + mes);
+                Greta.Signaling.publish("iceChannel", mes);
 
-                } catch (org.json.JSONException ex) {
-                    Log.d(TAG, ex.toString());
-                }
+            } catch (org.json.JSONException ex) {
+                Log.d(TAG, ex.toString());
             }
         }
 
@@ -116,7 +122,7 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
             Log.d(TAG, "local onCreateSuccess");
 
 
-            if (sessionDescription.type == SessionDescription.Type.OFFER) {
+            if (sessionDescription.type == SessionDescription.Type.OFFER && isInitiator) {
                 peerConnection.setLocalDescription(sdpObserver, sessionDescription);
                 JSONObject json = new JSONObject();
                 String message;
@@ -135,7 +141,7 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                 }
             }
 
-            if (sessionDescription.type == SessionDescription.Type.ANSWER) {
+            if (sessionDescription.type == SessionDescription.Type.ANSWER && !isInitiator) {
                 peerConnection.setLocalDescription(sdpObserver, sessionDescription);
 
                 JSONObject json = new JSONObject();
@@ -143,6 +149,7 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
 
                 try {
                     json.put("type", sessionDescription.type.toString().toLowerCase());
+                    Log.d(TAG, "sdpType: " + sessionDescription.type.toString().toLowerCase());
                     json.put("sdp", sessionDescription.description);
                     message = json.toString();
 //                Log.d(TAG, message);
@@ -193,7 +200,7 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                 int limit = buffer.data.limit();
                 byte[] datas = new byte[limit];
                 buffer.data.get(datas);
-//                localMessageReceived = new String(datas);
+                localMessageReceived = new String(datas);
 
             }
 
@@ -253,12 +260,13 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                     public void messageReceived(String message) {
                         try {
                             Log.d(TAG, "inside sdpChannel");
+                            Log.d(TAG, "sdpChannel message: " + message);
+                            Log.d(TAG, "sdpChannel isInitiator: " + isInitiator);
 
                             JSONObject jsonMessage = new JSONObject(message);
-
                             if (jsonMessage.getString("type").equals("offer") && !isInitiator) {
 
-                                Log.d(TAG, "not Initiator, Type OFFER");
+                                Log.d(TAG, "sdpChannel, Type OFFER");
 
                                 String type = jsonMessage.getString("type");
                                 String sdp = jsonMessage.getString("sdp");
@@ -266,10 +274,9 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                                 SessionDescription sdp2 = new SessionDescription(SessionDescription.Type.fromCanonicalForm(type), sdp);
                                 peerConnection.setRemoteDescription(sdpObserver, sdp2);
 
+                                Log.d(TAG, "createAnswer called");
                                 peerConnection.createAnswer(sdpObserver, new MediaConstraints());
 
-                                callButton.setEnabled(false);
-                                hangupButton.setEnabled(true);
                             }
 
                             else if (jsonMessage.getString("type").equals("answer") && isInitiator) {
@@ -292,18 +299,17 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                     @Override
                     public void messageReceived(String message) {
 
-                        if (!isInitiator) {
-                            Log.d(TAG, "Not initiator, iceChannel");
-                            try {
-                                JSONObject jsonMessage = new JSONObject(message);
+                        Log.d(TAG, "Not initiator, iceChannel, is initiator: " + isInitiator);
+                        Log.d(TAG, "messageReceived: " + message);
+                        try {
+                            JSONObject jsonMessage = new JSONObject(message);
 
-                                IceCandidate candidate = new IceCandidate(jsonMessage.getString("sdpMid"),
-                                        jsonMessage.getInt("sdpMLineIndex"), jsonMessage.getString("candidate"));
-                                peerConnection.addIceCandidate(candidate);
+                            IceCandidate candidate = new IceCandidate(jsonMessage.getString("sdpMid"),
+                                    jsonMessage.getInt("sdpMLineIndex"), jsonMessage.getString("candidate"));
+                            peerConnection.addIceCandidate(candidate);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -361,6 +367,42 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                     peerConnection.close();
             }
         });
+
+
+        Button sendMessage = (Button) findViewById(R.id.sendMessage);
+        assert sendMessage != null;
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText messageET = (EditText) findViewById(R.id.peerSendMessageEditText);
+                assert messageET != null;
+
+                String message = messageET.getText().toString();
+                if (!message.isEmpty()) {
+                    if (mDataChannel.state() == DataChannel.State.OPEN) {
+                        ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
+                        mDataChannel.send(new DataChannel.Buffer(buffer, false));
+                    }
+                }
+            }
+        });
+
+        Timer timer = new Timer("Timer");
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!localMessageReceived.equals(localLastMessageReceived)) {
+                            TextView messageReceived = (TextView) findViewById(R.id.peerMessageReceived);
+                            messageReceived.setText(localMessageReceived);
+                            localLastMessageReceived = localMessageReceived;
+                        }
+                    }
+                });
+            }
+        }, 0, 1000);
 
     }
 
