@@ -35,5 +35,8 @@ For the purpose of this tutorial I have created a [Simple Signaling Mechanism th
 #To-Do
 - [x] Switch out `Button` for [FButton](https://github.com/hoang8f/android-flat-button), more aesthetically pleasing and might also solve call/hangup button disable issue.
 - [x] Implement `start` button that creates both the `PeerConnectionFactory` and `PeerConnection` instances.
-- [ ] Fix callButton/hangupButton enable/disable logic.
-- [ ] Implement onPause/onResume PeerConnection handling (connect/disconnect)
+- [x] Fix callButton enable/disable logic.
+- [x] Implement onPause/onResume PeerConnection handling (connect/disconnect)
+- [ ] Fix hangupButton enable/disable logic.
+- [ ] Implement Toast, or similar mechanism, to advertise connection complete state.
+
