@@ -195,7 +195,12 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
 
             // If the DataChannel is open, it means the connection between peers has concluded sucessfully.
             if (mDataChannel.state() == DataChannel.State.OPEN)
-                setOnCallButtonsState();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setOnCallButtonsState();
+                    }
+                });
 
         }
 
@@ -327,7 +332,6 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                     @Override
                     public void messageReceived(String message) {
 
-                        Log.d(TAG, "Not initiator, iceChannel, is initiator: " + isInitiator);
                         Log.d(TAG, "messageReceived: " + message);
                         try {
                             JSONObject jsonMessage = new JSONObject(message);
