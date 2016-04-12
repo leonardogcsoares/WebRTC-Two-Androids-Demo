@@ -12,12 +12,12 @@
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_text_cursor_material.xml"
     },
     {
-        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_track_material.xml",
-        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_seekbar_track_material.xml"
-    },
-    {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\release\\drawable\\abc_dialog_material_background_light.xml",
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_dialog_material_background_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_seekbar_track_material.xml"
     },
     {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_full_material.xml",

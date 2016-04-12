@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import info.hoang8f.widget.FButton;
 import soares.leonardo.com.greta.signaling.Connected;
 import soares.leonardo.com.greta.signaling.Greta;
 import soares.leonardo.com.greta.signaling.Subscriber;
@@ -40,9 +41,10 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
 
     private DataChannel mDataChannel;
 
-
-    private Button callButton;
-    private Button hangupButton;
+    private FButton startButton;
+    private FButton callButton;
+    private FButton hangupButton;
+    private Button sendMessageButton;
 
     private String localMessageReceived = " ";
     private String localLastMessageReceived = " ";
@@ -190,6 +192,11 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
         @Override
         public void onStateChange() {
             Log.d(TAG, "dataChannelObserver onStateChange() " + mDataChannel.state().name());
+
+            // If the DataChannel is open, it means the connection between peers has concluded sucessfully.
+            if (mDataChannel.state() == DataChannel.State.OPEN)
+                setOnCallButtonsState();
+
         }
 
         @Override
@@ -214,6 +221,12 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Log.d(TAG, "init MainActivity onCreate");
+        startButton = (FButton) findViewById(R.id.peerConnectionStart);
+        callButton = (FButton) findViewById(R.id.peerConnectionCall);
+        hangupButton = (FButton) findViewById(R.id.peerConnectionHangup);
+
+        sendMessageButton = (Button) findViewById(R.id.sendMessage);
+
 
         Log.d(TAG, PeerConnectionFactory.initializeAndroidGlobals(getApplicationContext(), true, true, true)
                 ? "Success initAndroidGlobals" : "Failed initAndroidGlobals");
@@ -231,20 +244,35 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
         Log.d(TAG, "onResume()");
 
         subscribeToSignalingService();
-
-
-        List<PeerConnection.IceServer> iceServers = new LinkedList<>();
-        iceServers.add(new PeerConnection.IceServer("stun:stun.l.google.com:19302"));
-
-        MediaConstraints constraints = new MediaConstraints();
-        peerConnection = peerConnectionFactory.createPeerConnection(iceServers, constraints, peerConnectionObserver);
-
-        mDataChannel = peerConnection.createDataChannel("RTCDataChannel", new DataChannel.Init());
-        mDataChannel.registerObserver(dataChannelObserver);
+        setStartButtonsState();
 
         setSendButtonListeners();
 
 
+    }
+
+    private void setStartButtonsState() {
+        startButton.setEnabled(true);
+        callButton.setEnabled(false);
+        hangupButton.setEnabled(false);
+
+        sendMessageButton.setEnabled(false);
+    }
+
+    private void setReadyForCallButtonsState() {
+        startButton.setEnabled(false);
+        callButton.setEnabled(true);
+        hangupButton.setEnabled(false);
+
+        sendMessageButton.setEnabled(false);
+    }
+
+    private void setOnCallButtonsState() {
+        startButton.setEnabled(false);
+        callButton.setEnabled(false);
+        hangupButton.setEnabled(true);
+
+        sendMessageButton.setEnabled(true);
     }
 
     private void subscribeToSignalingService() {
@@ -319,7 +347,25 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
 
     private void setSendButtonListeners() {
 
-        callButton = (Button) findViewById(R.id.peerConnectionCall);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "startButton clicked");
+
+                List<PeerConnection.IceServer> iceServers = new LinkedList<>();
+                iceServers.add(new PeerConnection.IceServer("stun:stun.l.google.com:19302"));
+
+                MediaConstraints constraints = new MediaConstraints();
+                peerConnection = peerConnectionFactory.createPeerConnection(iceServers, constraints, peerConnectionObserver);
+
+                mDataChannel = peerConnection.createDataChannel("RTCDataChannel", new DataChannel.Init());
+                mDataChannel.registerObserver(dataChannelObserver);
+
+                setReadyForCallButtonsState();
+
+            }
+        });
+
         assert callButton != null;
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,25 +373,10 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
                 Log.d(TAG, "callButton clicked");
                 isInitiator = true;
 
-                callButton.setEnabled(false);
-                hangupButton.setEnabled(true);
-
-                if (peerConnection == null) {
-                    List<PeerConnection.IceServer> iceServers = new LinkedList<>();
-                    iceServers.add(new PeerConnection.IceServer("stun:stun.l.google.com:19302"));
-
-                    MediaConstraints constraints = new MediaConstraints();
-                    peerConnection = peerConnectionFactory.createPeerConnection(iceServers, constraints, peerConnectionObserver);
-
-                    mDataChannel = peerConnection.createDataChannel("RTCDataChannel", new DataChannel.Init());
-                    mDataChannel.registerObserver(dataChannelObserver);
-                }
-
                 peerConnection.createOffer(sdpObserver, new MediaConstraints());
             }
         });
 
-        hangupButton = (Button) findViewById(R.id.peerConnectionHangup);
         assert hangupButton != null;
         hangupButton.setEnabled(false);
         hangupButton.setOnClickListener(new View.OnClickListener() {
@@ -355,23 +386,22 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
 
                 isInitiator = false;
 
-                callButton.setEnabled(true);
-                hangupButton.setEnabled(false);
-
                 if (mDataChannel != null) {
                     mDataChannel.close();
                     mDataChannel.unregisterObserver();
                 }
 
-                if (peerConnection != null)
+                if (peerConnection != null) {
                     peerConnection.close();
+                    peerConnection = null;
+                }
             }
         });
 
 
-        Button sendMessage = (Button) findViewById(R.id.sendMessage);
-        assert sendMessage != null;
-        sendMessage.setOnClickListener(new View.OnClickListener() {
+
+        assert sendMessageButton != null;
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText messageET = (EditText) findViewById(R.id.peerSendMessageEditText);
@@ -418,6 +448,7 @@ public class LocalPeerConnectionActivity extends AppCompatActivity {
         if (peerConnection != null)
             peerConnection.close();
 
+        setStartButtonsState();
 
     }
 

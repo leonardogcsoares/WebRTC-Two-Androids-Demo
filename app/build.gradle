@@ -29,6 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'io.pristine:libjingle:11139@aar'
+    compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.android.support:design:23.2.1'
     compile project(":greta-signaling")
 }

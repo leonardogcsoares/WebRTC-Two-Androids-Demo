@@ -48,12 +48,12 @@
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_media.xml"
     },
     {
-        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_item_material.xml",
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_radio.xml",
@@ -116,12 +116,12 @@
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
-        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_search_view.xml"
-    },
-    {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_select_dialog_material.xml",
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_search_view.xml"
     },
     {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",

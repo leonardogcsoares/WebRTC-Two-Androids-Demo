@@ -20,12 +20,12 @@
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_fade_in.xml"
     },
     {
-        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_fade_out.xml"
-    },
-    {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_fade_out.xml"
     },
     {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",

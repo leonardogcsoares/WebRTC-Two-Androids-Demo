@@ -80,12 +80,12 @@
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
-        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
-    },
-    {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
         "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\Users\\leonardogcsoares\\AndroidStudioProjects\\WebRTC\\WebRTC-Two Peers\\greta-signaling\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
